@@ -1,5 +1,7 @@
 <?php
 
+ini_set('display_errors', '1');
+error_reporting(E_ALL);
 // 1. Siapkan folder sementara di /tmp yang berstatus read-write untuk Laravel
 $storageFolders = [
     '/tmp/storage/framework/views',
