@@ -2,12 +2,15 @@
 
 ini_set('display_errors', '1');
 error_reporting(E_ALL);
-// 1. Siapkan folder sementara di /tmp yang berstatus read-write untuk Laravel
+
+// 1. Siapkan folder sementara di /tmp yang berstatus read-write
 $storageFolders = [
     '/tmp/storage/framework/views',
     '/tmp/storage/framework/cache',
+    '/tmp/storage/framework/cache/data',
     '/tmp/storage/framework/sessions',
     '/tmp/storage/bootstrap/cache',
+    '/tmp/storage/logs',
 ];
 
 foreach ($storageFolders as $folder) {
@@ -16,18 +19,16 @@ foreach ($storageFolders as $folder) {
     }
 }
 
-// 2. Jalankan bootstrap Laravel secara manual
+// 2. Load autoload dan bootstrap Laravel
 require __DIR__ . '/../vendor/autoload.php';
 $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-// 3. Paksa Laravel menggunakan /tmp untuk mendaur ulang cache dan views
+// 3. Paksa Laravel menggunakan /tmp sebagai folder storage
 $app->useStoragePath('/tmp/storage');
 
-// 4. Proses request yang masuk
-$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
-$response = $kernel->handle(
-    $request = Illuminate\Http\Request::capture()
-);
+// 4. Proses request yang masuk (Arsitektur Baru Laravel 11+)
+$request = Illuminate\Http\Request::capture();
+$response = $app->handleRequest($request);
 
 $response->send();
-$kernel->terminate($request, $response);
+$app->terminate();
