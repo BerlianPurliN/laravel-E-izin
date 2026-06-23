@@ -27,8 +27,4 @@ $app = require_once __DIR__ . '/../bootstrap/app.php';
 $app->useStoragePath('/tmp/storage');
 
 // 4. Proses request yang masuk (Arsitektur Baru Laravel 11+)
-$request = Illuminate\Http\Request::capture();
-$response = $app->handleRequest($request);
-
-$response->send();
-$app->terminate();
+$app->handleRequest(Illuminate\Http\Request::capture());
