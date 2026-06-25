@@ -16,7 +16,7 @@
                 <div>
                     <label for="role" class="block text-sm font-medium text-slate-700 mb-1">Role</label>
                     <select id="role" name="role" x-model="role"
-                            class="block w-full rounded-lg border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
+                            class="block w-full rounded-lg border border-indigo-300 focus:border-indigo-500 focus:ring-indigo-500 text-sm py-2">
                         <option value="siswa">Siswa</option>
                         <option value="guru">Guru / Wali Kelas</option>
                     </select>
@@ -25,32 +25,39 @@
                 <div>
                     <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Nama Lengkap</label>
                     <input id="name" name="name" type="text" value="{{ old('name') }}"
-                           class="block w-full rounded-lg border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
+                           class="block w-full rounded-lg border border-indigo-300 focus:border-indigo-500 focus:ring-indigo-500 text-sm py-2"
+                           placeholder="cth: Budi Santoso">
                 </div>
 
                 <div>
                     <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email</label>
-                    <input id="email" name="email" type="email" value="{{ old('email') }}"
-                           class="block w-full rounded-lg border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
+                    <input id="email" name="email" type="email" value="{{ old('email') }}" required
+                           pattern=".*@smpn6\.sch\.id$"
+                           title="Email harus menggunakan domain @smpn6.sch.id"
+                           class="block w-full rounded-lg border border-indigo-300 focus:border-indigo-500 focus:ring-indigo-500 text-sm py-2"
+                           placeholder="cth: siswa8@smpn6.sch.id">
                 </div>
 
                 <div class="grid sm:grid-cols-2 gap-4" x-show="role === 'siswa'" x-cloak>
                     <div>
                         <label for="nisn" class="block text-sm font-medium text-slate-700 mb-1">NISN</label>
                         <input id="nisn" name="nisn" type="text" value="{{ old('nisn') }}"
-                               class="block w-full rounded-lg border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
+                               pattern="[0-9]+" maxlength="10"
+                               title="NISN hanya boleh berisi angka"
+                               class="block w-full rounded-lg border border-indigo-300 focus:border-indigo-500 focus:ring-indigo-500 text-sm py-2"
+                               placeholder="cth: 1234567890">
                     </div>
                     <div>
                         <label for="kelas" class="block text-sm font-medium text-slate-700 mb-1">Kelas</label>
-                        <input id="kelas" name="kelas" type="text" value="{{ old('kelas') }}" placeholder="cth: 7A"
-                               class="block w-full rounded-lg border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
+                        <input id="kelas" name="kelas" type="text" value="{{ old('kelas') }}" placeholder="cth: 7A" maxlength="3"
+                               class="block w-full rounded-lg border border-indigo-300 focus:border-indigo-500 focus:ring-indigo-500 text-sm py-2">
                     </div>
                 </div>
 
                 <div>
                     <label for="password" class="block text-sm font-medium text-slate-700 mb-1">Password</label>
                     <input id="password" name="password" type="text" value="{{ old('password') }}"
-                           class="block w-full rounded-lg border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm"
+                           class="block w-full rounded-lg border border-indigo-300 focus:border-indigo-500 focus:ring-indigo-500 text-sm py-2"
                            placeholder="Minimal 6 karakter">
                     <p class="mt-1 text-xs text-slate-400">Informasikan password ini ke pengguna. Bisa direset kemudian.</p>
                 </div>

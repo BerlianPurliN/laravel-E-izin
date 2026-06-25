@@ -38,7 +38,7 @@ Route::middleware(['auth', 'role:guru'])->prefix('guru')->name('guru.')->group(f
     Route::patch('/persetujuan/{leaveRequest}', [ApprovalController::class, 'update'])->name('persetujuan.update');
 });
 
-// === Role: Admin / Tata Usaha ===
+// === Role: Admin  ===
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'admin'])->name('dashboard');
     Route::resource('pengguna', UserController::class)->except(['show']);
